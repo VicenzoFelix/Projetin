@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Table(name = "projeto")
 public class Projeto {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    //@GeneratedValue(strategy = GenerationType.IDENTITY )
     private int id;
     private String nome;
     private String descricao;
