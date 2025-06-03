@@ -1,9 +1,12 @@
+import views.user.UserList;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class GerenciadorProjetoApp extends JFrame {
 
     private static final String EMPTY_SCREEN = "EMPTY_SCREEN";
+    private static final String USER_LIST_SCREEN = "USER_LIST_SCREEN";
     private CardLayout cardLayout;
     private JPanel mainPanel;
 
@@ -13,15 +16,19 @@ public class GerenciadorProjetoApp extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        cardLayout = new CardLayout();
+        mainPanel = new JPanel(cardLayout);
+
+        // Empty Panel
         JPanel emptyPanel = new JPanel(new BorderLayout());
         emptyPanel.add(
                 new JLabel("Bem-vindo! Use o menu para navegar!",
                         SwingConstants.CENTER), BorderLayout.CENTER);
-
-        cardLayout = new CardLayout();
-        mainPanel = new JPanel(cardLayout);
-
         mainPanel.add(emptyPanel, EMPTY_SCREEN);
+
+        // Screen User List
+        UserList userList = new UserList();
+        mainPanel.add(userList, USER_LIST_SCREEN);
 
         JMenu menu = new JMenu("Menu");
         JMenuItem listUsersItem = new JMenuItem("Listar Usuários");
@@ -34,6 +41,10 @@ public class GerenciadorProjetoApp extends JFrame {
         menuBar.add(menu);
 
         setJMenuBar(menuBar);
+
+        listUsersItem.addActionListener(e -> {
+            cardLayout.show(mainPanel, USER_LIST_SCREEN);
+        });
 
         exitItem.addActionListener(event -> {
             dispose();
@@ -48,6 +59,5 @@ public class GerenciadorProjetoApp extends JFrame {
         SwingUtilities.invokeLater(() -> {
             new GerenciadorProjetoApp().setVisible(true);
         });
-
     }
 }
