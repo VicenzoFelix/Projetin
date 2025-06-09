@@ -43,6 +43,16 @@ public class UserListTableModel extends AbstractTableModel {
         }
     }
 
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        // Só as colunas de botão serão "editáveis" para capturar cliques
+        return columnIndex == 4 || columnIndex == 5;
+    }
+
+    public Usuario getUsuarioAt(int rowIndex) {
+        return this.users.get(rowIndex);
+    }
+
     public void setUsers(List<Usuario> users) {
         this.users = users;
         fireTableDataChanged();
